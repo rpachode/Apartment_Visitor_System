@@ -2,80 +2,714 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ctrl + Muse — Digital Visitor Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>GateFlow | Apartment Visitor Management</title>
+
+  <meta
+    name="description"
+    content="Smart digital visitor management system for apartment security desks."
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>🏢 Apartment Visitor Register</h1>
-      <p class="subtitle">Ctrl + Muse | Team Lasika</p>
+
+  <!-- ================= SIDEBAR ================= -->
+
+  <aside class="sidebar">
+
+    <div class="logo-area">
+
+      <div class="logo-mark">
+        GF
+      </div>
+
+      <div>
+        <h1>GateFlow</h1>
+        <span>Visitor Management</span>
+      </div>
+
+    </div>
+
+    <nav class="navigation">
+
+      <button class="nav-item active" data-section="dashboard">
+        <span class="nav-icon">▦</span>
+        Dashboard
+      </button>
+
+      <button class="nav-item" data-section="visitors">
+        <span class="nav-icon">◉</span>
+        Visitors
+      </button>
+
+      <button class="nav-item" data-section="activity">
+        <span class="nav-icon">◷</span>
+        Activity
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="security-card">
+
+        <div class="security-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>Security Active</strong>
+          <span>Gate system online</span>
+        </div>
+
+      </div>
+
+      <div class="team-label">
+        <span>BUILT BY</span>
+        <strong>Team Rasika</strong>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <div class="mobile-logo">
+        <div class="logo-mark">GF</div>
+        <strong>GateFlow</strong>
+      </div>
+
+      <div class="topbar-right">
+
+        <div class="live-indicator">
+          <span></span>
+          LIVE
+        </div>
+
+        <div class="current-time" id="currentTime">
+          --:--:--
+        </div>
+
+        <div class="guard-profile">
+
+          <div class="guard-avatar">
+            G
+          </div>
+
+          <div>
+            <strong>Security Guard</strong>
+            <span>Front Gate</span>
+          </div>
+
+        </div>
+
+      </div>
+
     </header>
 
-    <!-- Add Visitor Form -->
-    <section class="card">
-      <h2>➕ Add Visitor</h2>
-      <form id="visitorForm">
-        <div class="form-group">
-          <label for="name">Visitor Name *</label>
-          <input type="text" id="name" placeholder="Enter full name" required />
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboardSection" class="page-section">
+
+      <div class="welcome-row">
+
+        <div>
+          <p class="eyebrow">SECURITY DASHBOARD</p>
+
+          <h2>
+            Good afternoon,
+            <span>Guard</span> 👋
+          </h2>
+
+          <p class="welcome-text">
+            Monitor visitor movement and maintain a secure digital gate log.
+          </p>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="wing">Wing *</label>
-            <select id="wing" required>
-              <option value="">Select</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="flat">Flat Number *</label>
-            <input type="number" id="flat" min="1" max="40" placeholder="1–40" required />
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Phone Number *</label>
-            <input type="tel" id="phone" placeholder="10 or 12 digits" maxlength="12" required />
-          </div>
+        <div class="date-chip" id="currentDate">
+          Today
         </div>
 
-        <button type="submit" class="btn-primary">Add Visitor</button>
-        <p id="formError" class="error"></p>
-      </form>
+      </div>
+
+
+      <!-- KPI CARDS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card primary-stat">
+
+          <div class="stat-top">
+            <span class="stat-title">Currently Inside</span>
+            <div class="stat-icon purple">●</div>
+          </div>
+
+          <div class="stat-number" id="insideCount">
+            0
+          </div>
+
+          <div class="stat-footer">
+            <span class="live-dot"></span>
+            Live at gate
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-title">Today's Entries</span>
+            <div class="stat-icon blue">↗</div>
+          </div>
+
+          <div class="stat-number" id="todayCount">
+            0
+          </div>
+
+          <div class="stat-footer">
+            Visitors registered today
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-title">Today's Exits</span>
+            <div class="stat-icon green">↘</div>
+          </div>
+
+          <div class="stat-number" id="exitCount">
+            0
+          </div>
+
+          <div class="stat-footer">
+            Visitors checked out
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-title">Total Records</span>
+            <div class="stat-icon orange">▤</div>
+          </div>
+
+          <div class="stat-number" id="totalCount">
+            0
+          </div>
+
+          <div class="stat-footer">
+            Stored on this device
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- MAIN GRID -->
+
+      <div class="dashboard-grid">
+
+
+        <!-- REGISTER VISITOR -->
+
+        <div class="panel register-panel">
+
+          <div class="panel-heading">
+
+            <div>
+              <p class="eyebrow">NEW ENTRY</p>
+              <h3>Register Visitor</h3>
+            </div>
+
+            <div class="heading-icon">
+              +
+            </div>
+
+          </div>
+
+
+          <form id="visitorForm">
+
+            <div class="form-row">
+
+              <div class="form-field">
+
+                <label for="name">
+                  Visitor name
+                </label>
+
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="e.g. Rahul Sharma"
+                  maxlength="60"
+                  required
+                />
+
+              </div>
+
+            </div>
+
+
+            <div class="form-row two">
+
+              <div class="form-field">
+
+                <label for="wing">
+                  Wing
+                </label>
+
+                <select id="wing" required>
+
+                  <option value="">
+                    Select wing
+                  </option>
+
+                  <option value="A">
+                    Wing A
+                  </option>
+
+                  <option value="B">
+                    Wing B
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-field">
+
+                <label for="flat">
+                  Flat number
+                </label>
+
+                <input
+                  id="flat"
+                  type="number"
+                  min="1"
+                  max="40"
+                  placeholder="e.g. 12"
+                  required
+                />
+
+              </div>
+
+            </div>
+
+
+            <div class="form-row two">
+
+              <div class="form-field">
+
+                <label for="phone">
+                  Mobile number
+                </label>
+
+                <input
+                  id="phone"
+                  type="tel"
+                  inputmode="numeric"
+                  maxlength="10"
+                  placeholder="10-digit number"
+                  required
+                />
+
+              </div>
+
+
+              <div class="form-field">
+
+                <label for="visitorType">
+                  Visitor type
+                </label>
+
+                <select id="visitorType" required>
+
+                  <option value="">
+                    Select type
+                  </option>
+
+                  <option value="Guest">
+                    Guest
+                  </option>
+
+                  <option value="Delivery">
+                    Delivery
+                  </option>
+
+                  <option value="Cab / Driver">
+                    Cab / Driver
+                  </option>
+
+                  <option value="Maintenance">
+                    Maintenance
+                  </option>
+
+                  <option value="Other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-field">
+
+              <label for="purpose">
+                Purpose of visit
+              </label>
+
+              <input
+                id="purpose"
+                type="text"
+                maxlength="100"
+                placeholder="Why is the visitor entering?"
+                required
+              />
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="primary-button"
+            >
+              <span>Register Entry</span>
+              <span class="button-arrow">→</span>
+            </button>
+
+            <p
+              id="formError"
+              class="form-message"
+            ></p>
+
+          </form>
+
+        </div>
+
+
+        <!-- CURRENTLY INSIDE -->
+
+        <div class="panel inside-panel">
+
+          <div class="panel-heading">
+
+            <div>
+              <p class="eyebrow">LIVE MONITOR</p>
+
+              <h3>
+                Currently Inside
+                <span
+                  class="heading-count"
+                  id="insideBadge"
+                >
+                  0
+                </span>
+              </h3>
+            </div>
+
+            <div class="live-badge">
+              <span></span>
+              Live
+            </div>
+
+          </div>
+
+
+          <div class="visitor-list" id="insideList">
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                ✓
+              </div>
+
+              <strong>
+                Gate is clear
+              </strong>
+
+              <span>
+                No visitors are currently inside.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- VISITOR INSIGHTS -->
+
+      <div class="insights-grid">
+
+
+        <div class="panel">
+
+          <div class="panel-heading">
+
+            <div>
+              <p class="eyebrow">OVERVIEW</p>
+              <h3>Visitor Breakdown</h3>
+            </div>
+
+          </div>
+
+          <div id="visitorBreakdown" class="breakdown">
+
+          </div>
+
+        </div>
+
+
+        <div class="panel quick-panel">
+
+          <div class="panel-heading">
+
+            <div>
+              <p class="eyebrow">QUICK INFO</p>
+              <h3>Gate Summary</h3>
+            </div>
+
+          </div>
+
+          <div class="quick-stat">
+            <span>Most recent entry</span>
+            <strong id="lastEntry">
+              No entries yet
+            </strong>
+          </div>
+
+          <div class="quick-stat">
+            <span>Most recent exit</span>
+            <strong id="lastExit">
+              No exits yet
+            </strong>
+          </div>
+
+          <div class="quick-stat">
+            <span>Storage</span>
+            <strong class="storage-status">
+              ● Local
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- Search + Stats -->
-    <section class="stats-bar">
-      <div class="search-box">
-        <label for="searchFlat">🔍 Search by Flat:</label>
-        <input type="text" id="searchFlat" placeholder="e.g., A12 or B5" />
+
+    <!-- ================= VISITORS ================= -->
+
+    <section
+      id="visitorsSection"
+      class="page-section hidden-section"
+    >
+
+      <div class="page-title">
+
+        <div>
+          <p class="eyebrow">VISITOR DATABASE</p>
+          <h2>Visitor Records</h2>
+
+          <p>
+            Search and review today's visitor activity.
+          </p>
+        </div>
+
       </div>
-      <div class="counter">
-        <strong>Inside:</strong> <span id="insideCount">0</span> visitors
+
+
+      <div class="panel">
+
+        <div class="filter-bar">
+
+          <div class="search-box">
+
+            <span>⌕</span>
+
+            <input
+              id="searchFlat"
+              type="search"
+              placeholder="Search name, flat, phone or purpose..."
+            />
+
+          </div>
+
+          <button
+            id="clearSearch"
+            class="secondary-button"
+            type="button"
+          >
+            Clear
+          </button>
+
+        </div>
+
+
+        <div
+          id="allVisitorsList"
+          class="full-history"
+        ></div>
+
       </div>
+
     </section>
 
-    <!-- Currently Inside List -->
-    <section class="card">
-      <h2>📍 Currently Inside</h2>
-      <div id="insideList" class="visitor-list">
-        <p class="empty-state">No visitors currently inside</p>
+
+    <!-- ================= ACTIVITY ================= -->
+
+    <section
+      id="activitySection"
+      class="page-section hidden-section"
+    >
+
+      <div class="page-title">
+
+        <div>
+          <p class="eyebrow">DAILY LOG</p>
+          <h2>Today's Activity</h2>
+
+          <p>
+            Complete record of visitor entries and exits.
+          </p>
+        </div>
+
       </div>
+
+
+      <div class="panel">
+
+        <div
+          id="historyList"
+          class="full-history"
+        ></div>
+
+      </div>
+
     </section>
 
-    <!-- Visitor History (Optional but useful) -->
-    <section class="card">
-      <h2>📜 Today's History</h2>
-      <div id="historyList" class="visitor-list">
-        <p class="empty-state">No visitor history yet</p>
+
+    <footer class="main-footer">
+
+      <span>
+        GateFlow Visitor Management
+      </span>
+
+      <span>
+        Designed & built by <strong>Team Rasika</strong>
+      </span>
+
+    </footer>
+
+  </main>
+
+
+  <!-- ================= EXIT MODAL ================= -->
+
+  <div
+    id="exitModal"
+    class="modal-overlay hidden"
+  >
+
+    <div class="modal">
+
+      <div class="modal-symbol">
+        ↘
       </div>
-    </section>
+
+      <p class="eyebrow">
+        CHECK OUT VISITOR
+      </p>
+
+      <h3>
+        Confirm visitor exit?
+      </h3>
+
+      <p id="exitModalMessage">
+        Mark this visitor as exited.
+      </p>
+
+      <div class="modal-actions">
+
+        <button
+          id="cancelExit"
+          class="secondary-button"
+          type="button"
+        >
+          Cancel
+        </button>
+
+        <button
+          id="confirmExit"
+          class="danger-button"
+          type="button"
+        >
+          Confirm Exit
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 
+
+  <!-- ================= TOAST ================= -->
+
+  <div
+    id="toast"
+    class="toast"
+  >
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">Success</span>
+  </div>
+
+
   <script src="script.js"></script>
+
 </body>
 </html>
