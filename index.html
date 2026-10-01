@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ctrl + Muse — Digital Visitor Register</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏢 Apartment Visitor Register</h1>
+      <p class="subtitle">Ctrl + Muse | Team Lasika</p>
+    </header>
+
+    <!-- Add Visitor Form -->
+    <section class="card">
+      <h2>➕ Add Visitor</h2>
+      <form id="visitorForm">
+        <div class="form-group">
+          <label for="name">Visitor Name *</label>
+          <input type="text" id="name" placeholder="Enter full name" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="wing">Wing *</label>
+            <select id="wing" required>
+              <option value="">Select</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="flat">Flat Number *</label>
+            <input type="number" id="flat" min="1" max="40" placeholder="1–40" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" placeholder="10 or 12 digits" maxlength="12" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Add Visitor</button>
+        <p id="formError" class="error"></p>
+      </form>
+    </section>
+
+    <!-- Search + Stats -->
+    <section class="stats-bar">
+      <div class="search-box">
+        <label for="searchFlat">🔍 Search by Flat:</label>
+        <input type="text" id="searchFlat" placeholder="e.g., A12 or B5" />
+      </div>
+      <div class="counter">
+        <strong>Inside:</strong> <span id="insideCount">0</span> visitors
+      </div>
+    </section>
+
+    <!-- Currently Inside List -->
+    <section class="card">
+      <h2>📍 Currently Inside</h2>
+      <div id="insideList" class="visitor-list">
+        <p class="empty-state">No visitors currently inside</p>
+      </div>
+    </section>
+
+    <!-- Visitor History (Optional but useful) -->
+    <section class="card">
+      <h2>📜 Today's History</h2>
+      <div id="historyList" class="visitor-list">
+        <p class="empty-state">No visitor history yet</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
